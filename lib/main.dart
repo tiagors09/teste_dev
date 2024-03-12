@@ -9,8 +9,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Configurações'),
+          leading: BackButton(
+            onPressed: () {},
+          ),
+        ),
         body: Center(
           child: Text('Hello World!'),
         ),
