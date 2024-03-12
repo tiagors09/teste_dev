@@ -20,10 +20,22 @@ class MainApp extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({
     super.key,
   });
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  _onSubmit(Period p) {
+    setState(() {
+      periods.add(p);
+    });
+    periods.map((e) => print(e));
+  }
 
   List<Period> get periods {
     return [
@@ -70,15 +82,17 @@ class Home extends StatelessWidget {
       onPressed: () {
         showDialog(
           context: context,
-          builder: (_) => const AlertDialog(
+          builder: (_) => AlertDialog(
             scrollable: true,
-            title: Text(
+            title: const Text(
               'Novo período',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            content: PeriodForm(),
+            content: PeriodForm(
+              onSubmit: _onSubmit,
+            ),
           ),
         );
       },

@@ -17,7 +17,7 @@ class DateSelectionButton extends StatelessWidget {
     showDatePicker(
       context: ctx,
       firstDate: DateTime(1999),
-      lastDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 10),
     ).then(
       (newDate) => onDateChange(newDate!),
     );

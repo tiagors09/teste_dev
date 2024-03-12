@@ -1,9 +1,17 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:teste_dev/components/date_selection_button.dart';
-import 'package:teste_dev/components/dropdown_selector.dart';
+import 'package:teste_dev/components/period.dart';
+import 'package:teste_dev/components/period_kind.dart';
 
 class PeriodForm extends StatefulWidget {
-  const PeriodForm({super.key});
+  final void Function(Period) onSubmit;
+
+  const PeriodForm({
+    super.key,
+    required this.onSubmit,
+  });
 
   @override
   State<PeriodForm> createState() {
@@ -56,24 +64,48 @@ class _PeriodForm extends State<PeriodForm> {
                 }),
               ),
             ),
-            const Padding(
+            /* const Padding(
               padding: EdgeInsets.all(8.0),
-              child: DropdownSelector(label: 'Categoria'),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: DropdownSelector(
-                label: 'Meta 1',
+              child: ValueInput(
+                label: 'Categoria',
+                selector: null,
+              ),
+            ),*/
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Meta 1'),
+                  ],
+                ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: DropdownSelector(
-                label: 'Meta 2',
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Meta 2'),
+                  ],
+                ),
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => widget.onSubmit(
+                Period(
+                  title: titleCtrl.value.toString(),
+                  start: _startDate,
+                  ends: _endsDate,
+                  kind: PeriodKind.category_1,
+                  goal1: Random().nextInt(1000),
+                  goal2: Random().nextInt(1000),
+                ),
+              ),
               child: const Text(
                 'Concluir',
               ),
