@@ -3,7 +3,6 @@ import 'package:teste_dev/components/period.dart';
 import 'package:teste_dev/components/period_form.dart';
 import 'package:teste_dev/components/period_kind.dart';
 import 'package:teste_dev/components/period_list.dart';
-import 'package:teste_dev/components/profile_pic.dart';
 import 'package:teste_dev/components/header.dart';
 
 void main() {
