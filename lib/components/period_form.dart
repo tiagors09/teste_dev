@@ -17,46 +17,43 @@ class _PeriodForm extends State<PeriodForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        TextField(
-          controller: titleCtrl,
-          decoration: const InputDecoration(
-            label: Text(
-              'Nomeie seu periodo',
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.2,
+      height: MediaQuery.of(context).size.height * 0.3,
+      margin: const EdgeInsets.all(2.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          TextField(
+            controller: titleCtrl,
+            decoration: const InputDecoration(
+              label: Text(
+                'Nomeie seu periodo',
+              ),
             ),
           ),
-        ),
-        DateSelectionButton(
-          label: 'Começa',
-          date: _startDate,
-          onDateChange: (newDate) => setState(() {
-            _startDate = newDate;
-          }),
-        ),
-        DateSelectionButton(
-          label: 'Termina',
-          date: _endsDate,
-          onDateChange: (newDate) => setState(() {
-            _endsDate = newDate;
-          }),
-        ),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Categoria',
-            ),
-          ],
-        ),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text(
-            'Concluir',
+          DateSelectionButton(
+            label: 'Começa',
+            date: _startDate,
+            onDateChange: (newDate) => setState(() {
+              _startDate = newDate;
+            }),
           ),
-        )
-      ],
+          DateSelectionButton(
+            label: 'Termina',
+            date: _endsDate,
+            onDateChange: (newDate) => setState(() {
+              _endsDate = newDate;
+            }),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              'Concluir',
+            ),
+          )
+        ],
+      ),
     );
   }
 }
