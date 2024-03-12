@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teste_dev/components/period_form.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,18 +10,43 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Configurações'),
-          leading: BackButton(
-            onPressed: () {},
-          ),
+    return const MaterialApp(
+      home: Home(),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (_) => const AlertDialog(
+                title: Text(
+                  'Novo período',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                content: PeriodForm()),
+          );
+        },
+      ),
+      appBar: AppBar(
+        title: const Text('Configurações'),
+        leading: BackButton(
+          onPressed: () {},
         ),
-        body: Container(
-          margin: const EdgeInsets.all(20.0),
-          color: Colors.red,
-        ),
+      ),
+      body: Container(
+        margin: const EdgeInsets.all(20),
       ),
     );
   }
