@@ -17,8 +17,9 @@ class MainApp extends StatelessWidget {
             onPressed: () {},
           ),
         ),
-        body: Center(
-          child: Text('Hello World!'),
+        body: Container(
+          margin: const EdgeInsets.all(20.0),
+          color: Colors.red,
         ),
       ),
     );
