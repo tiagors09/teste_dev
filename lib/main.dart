@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:teste_dev/components/period.dart';
 import 'package:teste_dev/components/period_form.dart';
 import 'package:teste_dev/components/period_kind.dart';
+import 'package:teste_dev/components/period_list.dart';
+import 'package:teste_dev/components/profile_pic.dart';
+import 'package:teste_dev/components/header.dart';
 
 void main() {
   runApp(const MainApp());
@@ -55,113 +57,59 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var appBar = AppBar(
+      title: const Text('Configurações'),
+      leading: BackButton(
+        onPressed: () {},
+      ),
+    );
+
+    var floatingActionButton = FloatingActionButton(
+      child: const Icon(
+        Icons.add,
+      ),
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (_) => const AlertDialog(
+            scrollable: true,
+            title: Text(
+              'Novo período',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            content: PeriodForm(),
+          ),
+        );
+      },
+    );
+
+    var container = Container(
+      margin: const EdgeInsets.all(20),
+      child: Column(
+        children: [
+          const Header(
+            path: 'https://via.placeholder.com/150/92c952',
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: const Text(
+              'Períodos',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          PeriodList(periods: periods),
+        ],
+      ),
+    );
+
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.add,
-        ),
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (_) => const AlertDialog(
-              scrollable: true,
-              title: Text(
-                'Novo período',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              content: PeriodForm(),
-            ),
-          );
-        },
-      ),
-      appBar: AppBar(
-        title: const Text('Configurações'),
-        leading: BackButton(
-          onPressed: () {},
-        ),
-      ),
-      body: Container(
-        margin: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    width: (MediaQuery.of(context).size.width * 0.8) - 20,
-                    padding: const EdgeInsets.all(8.0),
-                    child: const TextField(
-                      decoration: InputDecoration(
-                        label: Text('Apelido'),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    width: (MediaQuery.of(context).size.width * 0.2) - 20,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        IconButton(
-                          onPressed: MediaQuery.of(context).size.width < 800
-                              ? () {}
-                              : null,
-                          icon: ClipRRect(
-                            borderRadius: BorderRadius.circular(360),
-                            child: Image.network(
-                              'https://via.placeholder.com/150/92c952',
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: MediaQuery.of(context).size.width > 800,
-                          child: TextButton(
-                            child: const Text('Editar foto'),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              child: const Text(
-                'Períodos',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: periods.length,
-                itemBuilder: (_, index) {
-                  return Card(
-                    child: ListTile(
-                      title: Text(
-                        periods[index].title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      trailing: Text(
-                        '${DateFormat('dd/MM/yy').format(periods[index].start)} a ${DateFormat('dd/MM/yy').format(periods[index].ends)}',
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
+      floatingActionButton: floatingActionButton,
+      appBar: appBar,
+      body: container,
     );
   }
 }
